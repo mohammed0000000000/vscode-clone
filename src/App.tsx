@@ -1,13 +1,14 @@
 import "./App.css";
-import FileComponent from "./components/FileComponent";
 import { fileTree } from "./data/FileTree";
+import RecursiveComponent from "./components/RecursiveComponent";
 
 function App() {
   return (
     <>
-      <div className="">
-        <FileComponent name="Project 1" type="folder" children={[fileTree]} />
+      <div className="my-5">
+        {/* <FileComponent name="Project 1" type="folder" children={[fileTree]} /> */}
         {/* <FolderComponent folderName="index.tsx" /> */}
+        <RecursiveComponent fileTree={fileTree} />
       </div>
     </>
   );

@@ -22,9 +22,15 @@ export const fileTree: IFile = {
       ],
     },
     {
-      name: "index.html",
-      type: "file",
-      content: "Hello world",
+      name: "public",
+      type: "folder",
+      children: [
+        {
+          name: "index.html",
+          type: "file",
+          content: "<h1>VS Code Clone</h1>",
+        },
+      ],
     },
   ],
 };
