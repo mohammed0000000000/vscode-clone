@@ -1,9 +1,6 @@
 import { IFile } from "../interface";
-import FileIcon from "./SVG/FileIcon";
-import FolderIcon from "./SVG/FolderIcon";
 import ArrowIcon from "./SVG/ArrowIcon";
 import { useState } from "react";
-import OpenFolderIcon from "./SVG/OpenFolderIcon";
 import RenderFileIcon from "./RenderFileIcon";
 
 interface IProps {
@@ -25,21 +22,27 @@ IProps) => {
   return (
     <>
       <div className="mb-1 ml-2 cursor-pointer">
-        <div className="flex items-center space-x-2 mb-1">
+        <div className="flex items-center  space-x-1 mb-1">
           {type === "folder" ? (
-            <div onClick={toggleFolder} className="flex space-x-2 items-center">
-              <span style={isOpen ? { rotate: "90deg" } : {}}>
+            <div
+              onClick={toggleFolder}
+              className="flex space-x-1 items-center justify-center"
+            >
+              <span style={isOpen ? { rotate: "90deg" } : {}} className="block">
                 <ArrowIcon />
               </span>
-              <span>{isOpen ? <OpenFolderIcon /> : <FolderIcon />}</span>
+              <span className="block">
+                <RenderFileIcon fileName={name} type="folder" isOpen={isOpen} />
+              </span>
             </div>
           ) : (
-            <span className="inline-block">
-              <RenderFileIcon fileName={name} />
+            <span className="block">
+              <RenderFileIcon fileName={name} type="file" />
             </span>
           )}
-          <span>{name}</span>
+          <span className="block">{name}</span>
         </div>
+
         {children && isOpen && (
           <div>
             {children.map((child, idx) => (
