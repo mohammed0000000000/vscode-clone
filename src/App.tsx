@@ -6,8 +6,6 @@ function App() {
   return (
     <>
       <div className="my-5">
-        {/* <FileComponent name="Project 1" type="folder" children={[fileTree]} /> */}
-        {/* <FolderComponent folderName="index.tsx" /> */}
         <RecursiveComponent fileTree={fileTree} />
       </div>
     </>

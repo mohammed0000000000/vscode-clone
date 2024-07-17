@@ -26,7 +26,7 @@ export const fileTree: IFile = {
       type: "folder",
       children: [
         {
-          name: "index.html",
+          name: "vite.svg",
           type: "file",
           content: "<h1>VS Code Clone</h1>",
         },

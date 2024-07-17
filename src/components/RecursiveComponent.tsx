@@ -4,6 +4,7 @@ import FolderIcon from "./SVG/FolderIcon";
 import ArrowIcon from "./SVG/ArrowIcon";
 import { useState } from "react";
 import OpenFolderIcon from "./SVG/OpenFolderIcon";
+import RenderFileIcon from "./RenderFileIcon";
 
 interface IProps {
   fileTree: IFile;
@@ -34,7 +35,7 @@ IProps) => {
             </div>
           ) : (
             <span className="inline-block">
-              <FileIcon />
+              <RenderFileIcon fileName={name} />
             </span>
           )}
           <span>{name}</span>
