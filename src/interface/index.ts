@@ -8,7 +8,7 @@ export interface IFile {
 
 export interface IClickedFile {
   fileName: string;
-  fileContent: string;
+  fileContent: string | undefined;
 }
 export interface IInitialStateTreeSlice {
   openFiles: IFile[],
