@@ -4,3 +4,12 @@ export interface IFile {
   children?: IFile[];
   content?: string;
 }
+
+export interface IClickedFile {
+  fileName: string;
+  fileContent: string;
+}
+export interface IInitialStateTreeSlice {
+  openFiles: IFile[],
+  clickedFile: IClickedFile
+}
