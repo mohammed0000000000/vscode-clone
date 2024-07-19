@@ -4,7 +4,7 @@ import RecursiveComponent from "./components/RecursiveComponent";
 import { useSelector } from "react-redux";
 import { RootState } from "./app/store";
 import Bar from "./components/Bar";
-import Content from "./components/Content";
+import FileSyntaxHighlighter from "./components/FileSyntaxHighlighter";
 
 function App() {
   const { openFiles, clickedFile } = useSelector(
@@ -18,7 +18,7 @@ function App() {
         </aside>
         <section className="flex-1 space-y-1">
           <Bar openFiles={openFiles}></Bar>
-          <Content content={clickedFile.fileContent} />
+          <FileSyntaxHighlighter content={clickedFile.fileContent} />
         </section>
       </div>
     </>

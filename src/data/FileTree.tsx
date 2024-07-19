@@ -34,7 +34,11 @@ export const fileTree: IFile = {
           id: uuid(),
           name: ".vite",
           type: "file",
-          content: "<h1>VS Code Clone</h1>",
+          content: `export interface File System
+          {
+            path: string;
+            content: string;
+          }`,
         },
         {
           id: uuid(),
