@@ -2,7 +2,7 @@ import { IFile } from "../interface";
 import RenderFileIcon from "./RenderFileIcon";
 import CloseIcon from "./SVG/CloseIcon";
 import { useDispatch, useSelector } from "react-redux";
-import { setClickedFile, setActiveTab } from "../app/features/fileTreeSlice";
+import { setClickedFile } from "../app/features/fileTreeSlice";
 import { RootState } from "../app/store";
 
 interface IProps {
@@ -10,12 +10,13 @@ interface IProps {
 }
 
 const BarItem = ({ file }: IProps) => {
-  const { name, content } = file;
-  const { activeTabId } = useSelector((state: RootState) => state.fileTree);
+  const { name, content, id } = file;
+  const { clickedFile } = useSelector((state: RootState) => state.fileTree);
   const dispatch = useDispatch();
   const onClick = () => {
-    dispatch(setClickedFile({ fileName: name, fileContent: content }));
-    dispatch(setActiveTab(file.id));
+    dispatch(
+      setClickedFile({ fileName: name, fileContent: content, activeTabId: id })
+    );
   };
   return (
     <>
@@ -25,7 +26,9 @@ const BarItem = ({ file }: IProps) => {
         onClick={onClick}
         style={{
           borderBottom:
-            file.id === activeTabId ? "2px solid white" : "2px transparent",
+            file.id === clickedFile.activeTabId
+              ? "2px solid white"
+              : "2px transparent",
         }}
       >
         <span className=" inline-block mr-1">
@@ -40,7 +43,7 @@ const BarItem = ({ file }: IProps) => {
         <span
           className="mr-1 flex justify-center items-center cursor-pointer duration-100 rounded-sm hover:bg-black"
           style={
-            file.id === activeTabId
+            file.id === clickedFile.activeTabId
               ? { visibility: "visible" }
               : { visibility: "hidden" }
           }

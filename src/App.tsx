@@ -16,7 +16,7 @@ function App() {
         <aside className=" border-r-2 border-white pr-2 min-w-60">
           <RecursiveComponent fileTree={fileTree} />
         </aside>
-        <section className="flex-1">
+        <section className="flex-1 space-y-1">
           <Bar openFiles={openFiles}></Bar>
           <Content content={clickedFile.fileContent} />
         </section>

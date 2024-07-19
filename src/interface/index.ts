@@ -1,5 +1,5 @@
 export interface IFile {
-  id: string;
+  id: string | null;
   name: string;
   type: 'file' | 'folder';
   children?: IFile[];
@@ -9,9 +9,9 @@ export interface IFile {
 export interface IClickedFile {
   fileName: string;
   fileContent: string | undefined;
+  activeTabId: string | null;
 }
 export interface IInitialStateTreeSlice {
   openFiles: IFile[],
   clickedFile: IClickedFile,
-  activeTabId: string | null;
 }

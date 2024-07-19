@@ -3,7 +3,7 @@ import ArrowIcon from "./SVG/ArrowIcon";
 import { useState } from "react";
 import RenderFileIcon from "./RenderFileIcon";
 import { useSelector, useDispatch } from "react-redux";
-import { setOpenFiles, setActiveTab } from "../app/features/fileTreeSlice";
+import { setClickedFile, setOpenFiles } from "../app/features/fileTreeSlice";
 import { RootState } from "../app/store";
 import { doesFileExist } from "../utils/function";
 
@@ -18,7 +18,7 @@ const RecursiveComponent = ({
 }: // isOpen,
 // setIsOpen,
 IProps) => {
-  const { id, name, type, children } = fileTree;
+  const { id, name, type, children, content } = fileTree;
   const dispatch = useDispatch();
   const { openFiles } = useSelector((state: RootState) => state.fileTree);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -29,7 +29,9 @@ IProps) => {
     const exist = doesFileExist(openFiles, id);
     if (exist) return;
     dispatch(setOpenFiles([...openFiles, fileTree]));
-    dispatch(setActiveTab(id));
+    dispatch(
+      setClickedFile({ fileName: name, fileContent: content, activeTabId: id })
+    );
   };
 
   return (
