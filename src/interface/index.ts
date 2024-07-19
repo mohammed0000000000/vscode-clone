@@ -12,5 +12,6 @@ export interface IClickedFile {
 }
 export interface IInitialStateTreeSlice {
   openFiles: IFile[],
-  clickedFile: IClickedFile
+  clickedFile: IClickedFile,
+  activeTabId: string | null;
 }

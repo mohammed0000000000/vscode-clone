@@ -1,10 +1,9 @@
-import { useState } from "react";
 import { IFile } from "../interface";
 import RenderFileIcon from "./RenderFileIcon";
 import CloseIcon from "./SVG/CloseIcon";
-import { useDispatch } from "react-redux";
-// import { RootState } from "../app/store";
-import { setClickedFile } from "../app/features/fileTreeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setClickedFile, setActiveTab } from "../app/features/fileTreeSlice";
+import { RootState } from "../app/store";
 
 interface IProps {
   file: IFile;
@@ -12,19 +11,23 @@ interface IProps {
 
 const BarItem = ({ file }: IProps) => {
   const { name, content } = file;
-  const [isFileOpen, setFileOpen] = useState<boolean>(false);
-  // const { clickedFile } = useSelector((state: RootState) => state.fileTree);
+  const { activeTabId } = useSelector((state: RootState) => state.fileTree);
   const dispatch = useDispatch();
   const onClick = () => {
     dispatch(setClickedFile({ fileName: name, fileContent: content }));
-    setFileOpen((prev) => !prev);
+    dispatch(setActiveTab(file.id));
   };
   return (
     <>
       <li
         key={file.id}
-        className="flex items-center space-x-2 text-center p-1 hover:bg-gray-600  duration-300  rounded-md"
+        className="flex items-center space-x-2 text-center p-1 hover:bg-gray-600  duration-300  rounded-sm"
         onClick={onClick}
+        style={
+          file.id === activeTabId
+            ? { borderBottom: "2px solid white" }
+            : { borderBottom: "2px solid transparent" }
+        }
       >
         <span className=" inline-block mr-1">
           <RenderFileIcon fileName={file.name} type="file" />
@@ -36,8 +39,12 @@ const BarItem = ({ file }: IProps) => {
           {file.name}
         </span>
         <span
-          className="mr-1 flex justify-center items-center cursor-pointer duration-300 rounded-lg hover:bg-red-600"
-          style={!isFileOpen ? { visibility: "hidden" } : {}}
+          className="mr-1 flex justify-center items-center cursor-pointer duration-300 rounded-sm hover:bg-black hover:text-white"
+          style={
+            file.id === activeTabId
+              ? { visibility: "visible" }
+              : { visibility: "hidden" }
+          }
         >
           <CloseIcon />
         </span>

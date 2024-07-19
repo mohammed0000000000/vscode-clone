@@ -3,7 +3,7 @@ import ArrowIcon from "./SVG/ArrowIcon";
 import { useState } from "react";
 import RenderFileIcon from "./RenderFileIcon";
 import { useSelector, useDispatch } from "react-redux";
-import { setOpenFiles } from "../app/features/fileTreeSlice";
+import { setOpenFiles, setActiveTab } from "../app/features/fileTreeSlice";
 import { RootState } from "../app/store";
 import { doesFileExist } from "../utils/function";
 
@@ -29,6 +29,7 @@ IProps) => {
     const exist = doesFileExist(openFiles, id);
     if (exist) return;
     dispatch(setOpenFiles([...openFiles, fileTree]));
+    dispatch(setActiveTab(id));
   };
 
   return (
