@@ -34,8 +34,7 @@ export const fileTree: IFile = {
           id: uuid(),
           name: ".vite",
           type: "file",
-          content: `export interface File System
-          {
+          content: `export interface File System{
             path: string;
             content: string;
           }`,

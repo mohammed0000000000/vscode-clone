@@ -2,7 +2,7 @@ import { IFile } from "../interface";
 import RenderFileIcon from "./RenderFileIcon";
 import CloseIcon from "./SVG/CloseIcon";
 import { useDispatch, useSelector } from "react-redux";
-import { setClickedFile } from "../app/features/fileTreeSlice";
+import { setClickedFile, setOpenFiles } from "../app/features/fileTreeSlice";
 import { RootState } from "../app/store";
 
 interface IProps {
@@ -11,12 +11,33 @@ interface IProps {
 
 const BarItem = ({ file }: IProps) => {
   const { name, content, id } = file;
-  const { clickedFile } = useSelector((state: RootState) => state.fileTree);
+  const { clickedFile, openFiles } = useSelector(
+    (state: RootState) => state.fileTree
+  );
   const dispatch = useDispatch();
   const onClick = () => {
     dispatch(
       setClickedFile({ fileName: name, fileContent: content, activeTabId: id })
     );
+  };
+  const onRemove = (id: string | null) => {
+    const newOpenFiles: IFile[] = openFiles.filter((file) => file.id !== id);
+    dispatch(setOpenFiles(newOpenFiles));
+    if (newOpenFiles.length) {
+      const { id, name, content }: IFile =
+        newOpenFiles[newOpenFiles.length - 1];
+      dispatch(
+        setClickedFile({
+          fileContent: content,
+          activeTabId: id,
+          fileName: name,
+        })
+      );
+    } else {
+      dispatch(
+        setClickedFile({ fileName: "", fileContent: "", activeTabId: null })
+      );
+    }
   };
   return (
     <>
@@ -47,6 +68,10 @@ const BarItem = ({ file }: IProps) => {
               ? { visibility: "visible" }
               : { visibility: "hidden" }
           }
+          onClick={(event) => {
+            event.stopPropagation();
+            onRemove(id);
+          }}
         >
           <CloseIcon />
         </span>
