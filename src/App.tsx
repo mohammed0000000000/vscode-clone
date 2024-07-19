@@ -4,9 +4,12 @@ import RecursiveComponent from "./components/RecursiveComponent";
 import { useSelector } from "react-redux";
 import { RootState } from "./app/store";
 import Bar from "./components/Bar";
+import Content from "./components/Content";
 
 function App() {
-  const { openFiles } = useSelector((state: RootState) => state.fileTree);
+  const { openFiles, clickedFile } = useSelector(
+    (state: RootState) => state.fileTree
+  );
   return (
     <>
       <div className="my-2 flex space-x-2 h-screen">
@@ -15,6 +18,7 @@ function App() {
         </aside>
         <section className="flex-1">
           <Bar openFiles={openFiles}></Bar>
+          <Content content={clickedFile.fileContent} />
         </section>
       </div>
     </>

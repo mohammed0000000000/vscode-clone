@@ -19,7 +19,7 @@ export const fileTree: IFile = {
               id: uuid(),
               name: "react.js",
               type: "file",
-              content: "React.js",
+              content: "Lorem ipsum d",
             },
           ],
         },
