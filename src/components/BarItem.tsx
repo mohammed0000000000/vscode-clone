@@ -21,13 +21,12 @@ const BarItem = ({ file }: IProps) => {
     <>
       <li
         key={file.id}
-        className="flex items-center space-x-2 text-center p-1 hover:bg-gray-600  duration-300  rounded-sm"
+        className="min-w-28 flex items-center justify-between cursor-pointer space-x-2 text-center p-1 hover:bg-gray-600  duration-300  rounded-sm "
         onClick={onClick}
-        style={
-          file.id === activeTabId
-            ? { borderBottom: "2px solid white" }
-            : { borderBottom: "2px solid transparent" }
-        }
+        style={{
+          borderBottom:
+            file.id === activeTabId ? "2px solid white" : "2px transparent",
+        }}
       >
         <span className=" inline-block mr-1">
           <RenderFileIcon fileName={file.name} type="file" />
@@ -39,7 +38,7 @@ const BarItem = ({ file }: IProps) => {
           {file.name}
         </span>
         <span
-          className="mr-1 flex justify-center items-center cursor-pointer duration-300 rounded-sm hover:bg-black hover:text-white"
+          className="mr-1 flex justify-center items-center cursor-pointer duration-100 rounded-sm hover:bg-black"
           style={
             file.id === activeTabId
               ? { visibility: "visible" }
