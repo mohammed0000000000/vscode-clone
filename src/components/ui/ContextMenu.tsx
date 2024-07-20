@@ -1,18 +1,24 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setOpenFiles } from "../../app/features/fileTreeSlice";
 import { useEffect, useRef } from "react";
+import { RootState } from "../../app/store";
 interface IProp {
   position: { x: number; y: number };
   setShowMenu: (state: boolean) => void;
 }
 const ContextMenu = ({ position: { x, y }, setShowMenu }: IProp) => {
-  // let { openFiles } = useSelector(({ fileTree }: RootState) => fileTree);
+  const { tabIdToRemove, openFiles } = useSelector(
+    ({ fileTree }: RootState) => fileTree
+  );
   const menuRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const CloseAllHandler = () => {
     dispatch(setOpenFiles([]));
   };
-  const CloseHandler = () => {};
+  const CloseHandler = () => {
+    const newOpenFiles = openFiles.filter((file) => file.id !== tabIdToRemove);
+    dispatch(setOpenFiles(newOpenFiles));
+  };
 
   useEffect(() => {
     // console.log(menuRef.current);

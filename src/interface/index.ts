@@ -14,4 +14,5 @@ export interface IClickedFile {
 export interface IInitialStateTreeSlice {
   openFiles: IFile[],
   clickedFile: IClickedFile,
+  tabIdToRemove?: string | null;
 }

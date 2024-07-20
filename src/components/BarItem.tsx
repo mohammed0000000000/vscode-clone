@@ -2,7 +2,11 @@ import { IFile } from "../interface";
 import RenderFileIcon from "./RenderFileIcon";
 import CloseIcon from "./SVG/CloseIcon";
 import { useDispatch, useSelector } from "react-redux";
-import { setClickedFile, setOpenFiles } from "../app/features/fileTreeSlice";
+import {
+  setClickedFile,
+  setOpenFiles,
+  setTabIdToRemove,
+} from "../app/features/fileTreeSlice";
 import { RootState } from "../app/store";
 interface IProps {
   file: IFile;
@@ -49,6 +53,10 @@ const BarItem = ({ file }: IProps) => {
             file.id === clickedFile.activeTabId
               ? "2px solid white"
               : "2px transparent",
+        }}
+        onContextMenu={(e) => {
+          e.preventDefault();
+          dispatch(setTabIdToRemove(file.id));
         }}
       >
         <span className=" inline-block mr-1">
