@@ -4,7 +4,6 @@ import CloseIcon from "./SVG/CloseIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { setClickedFile, setOpenFiles } from "../app/features/fileTreeSlice";
 import { RootState } from "../app/store";
-
 interface IProps {
   file: IFile;
 }
@@ -81,3 +80,7 @@ const BarItem = ({ file }: IProps) => {
 };
 
 export default BarItem;
+
+// useEffect
+// Click Events
+// width height for menu
