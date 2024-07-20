@@ -6,26 +6,28 @@ import { RootState } from "./app/store";
 import Bar from "./components/Bar";
 import FileSyntaxHighlighter from "./components/FileSyntaxHighlighter";
 import ResizablePanel from "./components/ResizablePanel";
+import WelcomeTab from "./components/WelcomeTab";
 
 function App() {
   const { openFiles, clickedFile } = useSelector(
     (state: RootState) => state.fileTree
   );
+  console.log(openFiles.length);
   return (
     <>
       <ResizablePanel
         leftPanel={<RecursiveComponent fileTree={fileTree} />}
         rightPanel={
-          <>
-            <Bar openFiles={openFiles}></Bar>
-            <FileSyntaxHighlighter content={clickedFile.fileContent} />
-          </>
+          openFiles.length ? (
+            <>
+              <Bar openFiles={openFiles}></Bar>
+              <FileSyntaxHighlighter content={clickedFile.fileContent} />
+            </>
+          ) : (
+            <WelcomeTab />
+          )
         }
       ></ResizablePanel>
-      {/* <div className="my-2 flex space-x-2 h-screen">
-        <aside className=" border-r-2 border-white pr-2 min-w-60"></aside>
-        <section className="flex-1 space-y-1"></section>
-      </div> */}
     </>
   );
 }

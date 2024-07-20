@@ -13,7 +13,7 @@ const Bar = ({ openFiles }: IProps) => {
 
   return (
     <>
-      <div className="border-2 border-gray-500 p-1 rounded-sm bg-black min-h-[42px]">
+      <div className=" p-1 rounded-sm bg-black min-h-[42px]">
         <ul className="flex flex-row space-x-2 items-center">
           {renderOpenFiles}
         </ul>
